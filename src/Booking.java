@@ -20,6 +20,9 @@ public class Booking {
         System.out.println("Vehicle: " + vehicle.brand + " " + vehicle.model);
         System.out.println("Rental Days: " + days);
         System.out.println("Total Rent: Rs." + totalRent);
-        System.out.println("----------------------");
+    }
+
+    public double calculateLateFee(int extraDays) {
+        return extraDays * 500;
     }
 }
