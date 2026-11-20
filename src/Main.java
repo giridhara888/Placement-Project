@@ -12,6 +12,8 @@ public class Main {
         manager.addVehicle(new Vehicle(101, "Maruti", "Swift", 1200));
         manager.addVehicle(new Vehicle(102, "Hyundai", "i20", 1500));
         manager.addVehicle(new Vehicle(103, "Honda", "City", 2000));
+        manager.addVehicle(new Vehicle(103, "Honda", "City", 2000));
+
 
         int choice;
 
