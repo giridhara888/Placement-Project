@@ -8,12 +8,10 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         RentalManager manager = new RentalManager();
 
-        // Add sample vehicles
-        manager.addVehicle(new Vehicle(101, "Maruti", "Swift", 1200));
-        manager.addVehicle(new Vehicle(102, "Hyundai", "i20", 1500));
-        manager.addVehicle(new Vehicle(103, "Honda", "City", 2000));
-        m
-
+        // Add sample cars
+        manager.addVehicle(new Car(101, "Maruti", "Swift", 1200));
+        manager.addVehicle(new Car(102, "Hyundai", "i20", 1500));
+        manager.addVehicle(new Car(103, "Honda", "City", 2000));
 
         int choice;
 
@@ -24,7 +22,8 @@ public class Main {
             System.out.println("3. Register Customer");
             System.out.println("4. Book a Car");
             System.out.println("5. Return a Car");
-            System.out.println("6. Exit");
+            System.out.println("6. Search Car By ID");
+            System.out.println("7. Exit");
 
             System.out.print("Enter your choice: ");
             choice = Integer.parseInt(sc.nextLine());
@@ -48,7 +47,13 @@ public class Main {
                     System.out.print("Enter Daily Rent: ");
                     double price = Double.parseDouble(sc.nextLine());
 
-                    manager.addVehicle(new Vehicle(id, brand, model, price));
+                    if (price <= 0) {
+                        System.out.println("Invalid rental price!");
+                    } else {
+                        manager.addVehicle(
+                            new Car(id, brand, model, price)
+                        );
+                    }
                     break;
 
                 case 3:
@@ -61,7 +66,9 @@ public class Main {
                     System.out.print("Enter Phone: ");
                     String phone = sc.nextLine();
 
-                    manager.addCustomer(new Customer(cid, name, phone));
+                    manager.addCustomer(
+                        new Customer(cid, name, phone)
+                    );
                     break;
 
                 case 4:
@@ -83,19 +90,36 @@ public class Main {
                     for (Customer c : manager.customers) {
                         if (c.id == customerId) {
                             customer = c;
+                            break;
                         }
                     }
 
                     for (Vehicle v : manager.vehicles) {
-                        if (v.id == carId) {
+                        if (v.getId() == carId) {
                             vehicle = v;
+                            break;
                         }
                     }
 
-                    if (customer != null && vehicle != null && days > 0) {
-                        manager.bookVehicle(new Booking(bid, customer, vehicle, days));
+                    if (customer == null || vehicle == null) {
+                        System.out.println(
+                            "Invalid customer ID or car ID!"
+                        );
                     } else {
-                        System.out.println("Invalid customer, car or rental days!");
+                        try {
+                            Booking booking = new Booking(
+                                bid, customer, vehicle, days
+                            );
+
+                            manager.bookVehicle(booking);
+
+                        } catch (VehicleNotAvailableException |
+                                 InvalidBookingException e) {
+
+                            System.out.println(
+                                "Error: " + e.getMessage()
+                            );
+                        }
                     }
                     break;
 
@@ -107,14 +131,23 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.println("Thank you for using our system!");
+                    System.out.print("Enter Car ID to search: ");
+                    int searchId = Integer.parseInt(sc.nextLine());
+
+                    manager.searchVehicle(searchId);
+                    break;
+
+                case 7:
+                    System.out.println(
+                        "Thank you for using our system!"
+                    );
                     break;
 
                 default:
                     System.out.println("Invalid choice!");
             }
 
-        } while (choice != 6);
+        } while (choice != 7);
 
         sc.close();
     }
