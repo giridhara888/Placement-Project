@@ -14,13 +14,7 @@ public class Booking {
         this.totalRent = vehicle.price * days;
     }
 
-    public void display() {
-        System.out.println("Booking ID: " + bookingId);
-        System.out.println("Customer: " + customer.name);
-        System.out.println("Vehicle: " + vehicle.brand + " " + vehicle.model);
-        System.out.println("Rental Days: " + days);
-        System.out.println("Total Rent: Rs." + totalRent);
-    }
+    
 
     public double calculateLateFee(int extraDays) {
         return extraDays * 500;
