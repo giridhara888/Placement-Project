@@ -1,10 +1,11 @@
 
-public class Vehicle {
-    int id;
-    String brand;
-    String model;
-    double price;
-    boolean available;
+public abstract class Vehicle {
+
+    private int id;
+    private String brand;
+    private String model;
+    private double price;
+    private boolean available;
 
     public Vehicle(int id, String brand, String model, double price) {
         this.id = id;
@@ -12,6 +13,30 @@ public class Vehicle {
         this.model = model;
         this.price = price;
         this.available = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public void display() {
