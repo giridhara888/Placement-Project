@@ -8,6 +8,7 @@ public class Customer {
         this.id = id;
         this.name = name;
         this.phone = phone;
+    
     }
 
     public void display() {
@@ -15,5 +16,6 @@ public class Customer {
         System.out.println("Name: " + name);
         System.out.println("Phone: " + phone);
         System.out.println("----------------------");
+        System.out.print("");
     }
 }
